@@ -22,6 +22,6 @@ jobs:
         run: yarn storybook &
       - name: Storybook tests
         run: |
-          yarn test:storybook
+          yarn test-storybook
       - name: Stop Storybook
         run: kill $(lsof -t -i:6006)
