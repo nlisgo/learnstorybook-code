@@ -1,5 +1,5 @@
 # Workflow name
-name: "Accessibility Audit"
+name: "Accessibility and Interaction tests"
 
 # Event for the workflow
 on:
