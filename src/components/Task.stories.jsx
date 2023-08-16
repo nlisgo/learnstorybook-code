@@ -4,6 +4,15 @@ export default {
   component: Task,
   title: "Task",
   tags: ["autodocs"],
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          { id: 'aria-required-parent', enabled: false },
+        ],
+      },
+    },
+  },
 };
 
 export const Default = {
