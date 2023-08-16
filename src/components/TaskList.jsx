@@ -6,14 +6,10 @@ import { updateTaskState } from "../lib/store";
 export default function TaskList() {
   // We're retrieving our state from the store
   const tasks = useSelector((state) => {
-    const tasksInOrder = [
+    return [
       ...state.taskbox.tasks.filter((t) => t.state === "TASK_PINNED"),
       ...state.taskbox.tasks.filter((t) => t.state !== "TASK_PINNED"),
     ];
-    const filteredTasks = tasksInOrder.filter(
-      (t) => t.state === "TASK_INBOX" || t.state === "TASK_PINNED"
-    );
-    return filteredTasks;
   });
 
   const { status } = useSelector((state) => state.taskbox);
@@ -61,7 +57,7 @@ export default function TaskList() {
   }
 
   return (
-    <div className="list-items" data-testid="success" key={"success"}>
+    <div className="list-items" role={"list"} data-testid="success" key={"success"}>
       {tasks.map((task) => (
         <Task
           key={task.id}

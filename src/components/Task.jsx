@@ -5,9 +5,14 @@ export default function Task({
   task: { id, title, state },
   onArchiveTask,
   onPinTask,
+  onEditTitle,
 }) {
   return (
-    <div className={`list-item ${state}`}>
+    <div
+      className={`list-item ${state}`}
+      role="listitem"
+      aria-label={`task-${id}`}
+    >
       <label
         htmlFor="checked"
         aria-label={`archiveTask-${id}`}
@@ -20,17 +25,22 @@ export default function Task({
           id={`archiveTask-${id}`}
           checked={state === "TASK_ARCHIVED"}
         />
-        <span className="checkbox-custom" onClick={() => onArchiveTask(id)} />
+        <span
+          className="checkbox-custom"
+          onClick={() => onArchiveTask(id)}
+          role="button"
+          aria-label={`archiveButton-${id}`}
+        />
       </label>
 
       <label htmlFor="title" aria-label={title} className="title">
         <input
           type="text"
           value={title}
-          readOnly={true}
           name="title"
           placeholder="Input title"
           style={{ textOverflow: "ellipsis" }}
+          onChange={(e) => onEditTitle(e.target.value, id)}
         />
       </label>
 
@@ -39,7 +49,7 @@ export default function Task({
           className="pin-button"
           onClick={() => onPinTask(id)}
           id={`pinTask-${id}`}
-          aria-label={`pinTask-${id}`}
+          aria-label={state === "TASK_PINNED" ? "unpin" : "pin"}
           key={`pinTask-${id}`}
         >
           <span className={`icon-star`} />
@@ -63,4 +73,6 @@ Task.propTypes = {
   onArchiveTask: PropTypes.func,
   /** Event to change the task to pinned */
   onPinTask: PropTypes.func,
+  /** Event to change the task title */
+  onEditTitle: PropTypes.func,
 };
